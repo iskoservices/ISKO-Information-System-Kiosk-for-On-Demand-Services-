@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISKO | Student Services</title>
+<style>
+:root{--navy:#17324d;--blue:#285b83;--gold:#e3b85d;--bg:#f3f6f9;--ink:#263442;--muted:#718096;--line:#e3eaf0;--white:#fff;--green:#287a59}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px max(5%,calc((100% - 1080px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:23px;font-weight:800;letter-spacing:1px}.brand span{color:var(--gold)}.tagline{font-size:12px;color:#d5e0e9;margin-top:4px}
+main{max-width:1080px;margin:30px auto;padding:0 20px 45px}.hidden{display:none!important}
+.login-wrap{max-width:420px;margin:55px auto;background:white;border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:0 8px 28px #17324d12}
+h1,h2,h3{color:var(--navy);margin-top:0}h1{font-size:25px;margin-bottom:8px}h2{font-size:19px;margin-bottom:6px}.muted{color:var(--muted);font-size:13px;line-height:1.5}
+label{display:block;font-size:13px;font-weight:700;color:#465767;margin:15px 0 7px}
+input,select,textarea{width:100%;border:1px solid #ccd7e0;border-radius:8px;padding:11px 12px;font:inherit;background:white;color:var(--ink)}
+button{border:0;border-radius:8px;background:var(--blue);color:white;padding:11px 16px;font-weight:700;cursor:pointer}
+button:hover{filter:brightness(1.08)}button.secondary{background:#eaf0f5;color:var(--navy)}button.small{padding:8px 12px;font-size:12px}
+.login-wrap button{width:100%;margin-top:18px}.demo-note{margin-top:18px;padding:11px;background:#fff8e8;border:1px solid #f0dfb8;border-radius:8px;font-size:12px;color:#76591e;line-height:1.5}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.welcome h1{margin-bottom:5px}.pill{display:inline-block;background:#eaf1f7;color:var(--blue);padding:7px 11px;border-radius:30px;font-size:12px;font-weight:700}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:18px;box-shadow:0 3px 12px #19324b08}
+.services{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:16px}
+.service{border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;gap:11px;align-items:flex-start}
+.service input{width:auto;margin-top:3px}.service strong{display:block;font-size:13px;color:var(--navy)}.service span{font-size:11px;color:var(--muted);display:block;margin-top:4px;line-height:1.4}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-actions{display:flex;gap:9px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.notice{padding:12px;border-radius:9px;background:#eef6f2;color:#286548;font-size:13px;margin-top:14px}
+.request{border-top:1px solid var(--line);padding:13px 0}.request:first-of-type{border-top:0}.request-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.request-name{font-weight:700;color:var(--navy);font-size:14px}.status{font-size:11px;font-weight:700;border-radius:20px;padding:5px 9px;background:#fff3d9;color:#88611b}.request-meta{font-size:12px;color:var(--muted);margin-top:6px}
+.empty{padding:22px;text-align:center;color:var(--muted);font-size:13px;background:#f8fafc;border-radius:9px}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:18px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.services{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}main{margin-top:20px}.login-wrap{margin:30px auto}}
+</style>
+</head>
+<body>
+<header>
+ <div><div class="brand">ISKO<span>.</span></div><div class="tagline">Information System &amp; Kiosk for On-Demand Services</div></div>
+ <div id="header-user" class="hidden"><button class="secondary small" onclick="logout()">Log out</button></div>
+</header>
+
+<main>
+<section id="login-screen" class="login-wrap">
+ <h1>Student Login</h1>
+ <p class="muted">Log in to request academic documents and monitor your requests.</p>
+ <form id="login-form">
+  <label for="student-id">Student number</label>
+  <input id="student-id" autocomplete="username" required placeholder="Enter student number">
+  <label for="student-password">Password</label>
+  <input id="student-password" type="password" autocomplete="current-password" required placeholder="Enter password">
+  <button type="submit">Log in</button>
+ </form>
+ <div class="demo-note"><b>Prototype demo account</b><br>Student number: <b>2022-0001</b><br>Password: <b>iska123</b><br>These are fictional demo credentials. Change them in the code if needed.</div>
+</section>
+
+<section id="student-screen" class="hidden">
+ <div class="topbar">
+  <div class="welcome"><h1>Welcome, Iska!</h1><p class="muted">Student self-service portal</p></div>
+  <span class="pill">BS Meteorology · BSMet-4A · 4th Year</span>
+ </div>
+ <div class="grid">
+  <div>
+   <section class="panel">
+    <h2>Request a Document</h2>
+    <p class="muted">Choose the document you need, provide the purpose, and submit your request.</p>
+    <form id="request-form">
+     <div class="services">
+      <label class="service"><input type="radio" name="document" value="Certificate of Registration (COR)" required><span><strong>Certificate of Registration (COR)</strong><span>Proof of current enrollment and registered subjects.</span></span></label>
+      <label class="service"><input type="radio" name="document" value="Certificate of Grades (COG)"><span><strong>Certificate of Grades (COG)</strong><span>Record of grades for a specified term.</span></span></label>
+      <label class="service"><input type="radio" name="document" value="Good Moral Certificate"><span><strong>Good Moral Certificate</strong><span>Certification of student conduct.</span></span></label>
+      <label class="service"><input type="radio" name="document" value="Transcript of Records (TOR)"><span><strong>Transcript of Records (TOR)</strong><span>Official academic record request.</span></span></label>
+      <label class="service"><input type="radio" name="document" value="Certificate of Enrollment"><span><strong>Certificate of Enrollment</strong><span>Certification that the student is enrolled.</span></span></label>
+      <label class="service"><input type="radio" name="document" value="Other document"><span><strong>Other document</strong><span>For another academic document request.</span></span></label>
+     </div>
+     <label for="purpose">Purpose of request</label>
+     <select id="purpose" required>
+      <option value="">Select purpose</option><option>Scholarship application</option><option>Employment requirement</option><option>Personal copy</option><option>School requirement</option><option>Other</option>
+     </select>
+     <label for="notes">Additional details (optional)</label>
+     <textarea id="notes" rows="2" placeholder="e.g. Semester or academic year, number of copies"></textarea>
+     <div class="form-actions"><button type="submit">Submit Request</button><span class="hint muted">Demo only — no actual request is sent.</span></div>
+     <div id="confirmation" class="notice hidden" role="status"></div>
+    </form>
+   </section>
+  </div>
+  <div>
+   <section class="panel">
+    <h2>My Student Profile</h2>
+    <p class="muted">Fictional student information for this prototype.</p>
+    <p><b>Student name:</b> Iska</p><p><b>Student number:</b> 2022-0001</p><p><b>Program:</b> BS Meteorology</p><p><b>Year &amp; section:</b> 4th Year · BSMet-4A</p>
+   </section>
+   <section class="panel">
+    <h2>My Requests</h2>
+    <p class="muted">Track the requests submitted during this browser session.</p>
+    <div id="requests-list"><div class="empty">You have not submitted any requests yet.</div></div>
+   </section>
+  </div>
+ </div>
+</section>
+</main>
+<footer>ISKO Student Services · Academic prototype · Fictional data only</footer>
+
+<script>
+/* DEMO LOGIN ONLY. This is not secure authentication. */
+const DEMO_STUDENT_NUMBER = "2022-0001";
+const DEMO_PASSWORD = "iska123";
+let requests = [];
+
+document.getElementById("login-form").addEventListener("submit", function(event) {
+ event.preventDefault();
+ const id = document.getElementById("student-id").value.trim();
+ const password = document.getElementById("student-password").value;
+ if (id === DEMO_STUDENT_NUMBER && password === DEMO_PASSWORD) {
+  document.getElementById("login-screen").classList.add("hidden");
+  document.getElementById("student-screen").classList.remove("hidden");
+  document.getElementById("header-user").classList.remove("hidden");
+ } else {
+  alert("Incorrect student number or password. Please use the demo credentials shown below.");
+ }
+});
+
+function logout() {
+ document.getElementById("student-screen").classList.add("hidden");
+ document.getElementById("header-user").classList.add("hidden");
+ document.getElementById("login-screen").classList.remove("hidden");
+ document.getElementById("login-form").reset();
+}
+
+document.getElementById("request-form").addEventListener("submit", function(event) {
+ event.preventDefault();
+ const selected = document.querySelector('input[name="document"]:checked');
+ if (!selected) return;
+ const requestItem = {
+  number: "ISKO-" + String(Date.now()).slice(-6),
+  document: selected.value,
+  purpose: document.getElementById("purpose").value,
+  notes: document.getElementById("notes").value.trim(),
+  date: new Date().toLocaleString(),
+  status: "Submitted"
+ };
+ requests.unshift(requestItem);
+ renderRequests();
+ const confirmation = document.getElementById("confirmation");
+ confirmation.textContent = "Request submitted successfully! Your demo reference number is " + requestItem.number + ".";
+ confirmation.classList.remove("hidden");
+ this.reset();
+});
+
+function renderRequests() {
+ const container = document.getElementById("requests-list");
+ if (requests.length === 0) {
+  container.innerHTML = '<div class="empty">You have not submitted any requests yet.</div>';
+  return;
+ }
+ container.innerHTML = requests.map(item => `
+  <div class="request">
+   <div class="request-head"><span class="request-name">${item.document}</span><span class="status">${item.status}</span></div>
+   <div class="request-meta">Reference: ${item.number}<br>Purpose: ${item.purpose}<br>Submitted: ${item.date}${item.notes ? "<br>Details: " + item.notes : ""}</div>
+  </div>
+ `).join("");
+}
+</script>
+</body>
+</html>
