@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +60,15 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:18px}
 .receipt-item{border-bottom:1px dotted #9aa6b2;padding:7px 0}
 .receipt-item b{display:block;font-size:10px;text-transform:uppercase;color:#64748b;margin-bottom:3px}
 .print-actions{display:flex;justify-content:center;gap:10px;margin:20px 0}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.services{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}main{margin-top:20px}.login-wrap{margin:30px auto}.paper{padding:22px 18px}.receipt{padding:20px 16px}}
+@media(max-width:760px){
+ .grid{grid-template-columns:1fr}
+ .services{grid-template-columns:1fr}
+ .form-row{grid-template-columns:1fr}
+ main{margin-top:20px}
+ .login-wrap{margin:30px auto}
+ .paper{padding:22px 18px}
+ .receipt{padding:20px 16px}
+}
 @media print{
  @page{size:A4;margin:15mm}
  body{background:white;color:#111}
@@ -74,9 +83,15 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:18px}
 </head>
 <body>
 <header>
- <div><div class="brand">ISKO<span>.</span></div><div class="tagline">Information System &amp; Kiosk for On-Demand Services</div></div>
- <div id="header-user" class="hidden"><button class="secondary" onclick="logout()">Log out</button></div>
+ <div>
+  <div class="brand">ISKO<span>.</span></div>
+  <div class="tagline">Information System &amp; Kiosk for On-Demand Services</div>
+ </div>
+ <div id="header-user" class="hidden">
+  <button class="secondary" onclick="logout()">Log out</button>
+ </div>
 </header>
+
 <main>
 <section id="login-screen" class="login-wrap">
  <h1>Student Login</h1>
@@ -88,37 +103,79 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:18px}
   <input id="student-password" type="password" autocomplete="current-password" required placeholder="Enter password">
   <button type="submit">Log in</button>
  </form>
- <div class="demo-note"><b>Prototype demo account</b><br>Student number: <b>2022-0001</b><br>Password: <b>iska123</b></div>
+ <div class="demo-note">
+  <b>Prototype demo account</b><br>
+  Student number: <b>2022-0001</b><br>
+  Password: <b>iska123</b>
+ </div>
 </section>
 
 <section id="student-screen" class="hidden">
  <div class="topbar">
-  <div><h1>Welcome, Iska!</h1><p class="muted">Student self-service document kiosk</p></div>
+  <div>
+   <h1>Welcome, Iska!</h1>
+   <p class="muted">Student self-service document kiosk</p>
+  </div>
   <span class="pill">BS Meteorology · BSMet-4A · 4th Year</span>
  </div>
+
  <div class="grid">
   <section class="panel">
    <h2>Generate a Document</h2>
    <p class="muted">Choose a document, complete the payment details, then preview and print your document and claim/payment stub.</p>
+
    <form id="document-form">
     <div class="services">
-     <label class="service"><input type="radio" name="document" value="COR" required><span><strong>Certificate of Registration (COR)</strong><span>Registration information for the current term.</span></span></label>
-     <label class="service"><input type="radio" name="document" value="COG"><span><strong>Certificate of Grades (COG)</strong><span>Sample grade record for the selected student.</span></span></label>
-     <label class="service"><input type="radio" name="document" value="Good Moral"><span><strong>Good Moral Certificate</strong><span>Conduct certification template.</span></span></label>
-     <label class="service"><input type="radio" name="document" value="TOR"><span><strong>Transcript of Records (TOR)</strong><span>Academic record template.</span></span></label>
-     <label class="service"><input type="radio" name="document" value="Enrollment"><span><strong>Certificate of Enrollment</strong><span>Enrollment certification template.</span></span></label>
-     <label class="service"><input type="radio" name="document" value="Other"><span><strong>Other document</strong><span>Specify the document requested below.</span></span></label>
+     <label class="service">
+      <input type="radio" name="document" value="COR" required>
+      <span><strong>Certificate of Registration (COR)</strong><span>Registration information for the current term.</span></span>
+     </label>
+     <label class="service">
+      <input type="radio" name="document" value="COG">
+      <span><strong>Certificate of Grades (COG)</strong><span>Sample grade record for the selected student.</span></span>
+     </label>
+     <label class="service">
+      <input type="radio" name="document" value="Good Moral">
+      <span><strong>Good Moral Certificate</strong><span>Conduct certification template.</span></span>
+     </label>
+     <label class="service">
+      <input type="radio" name="document" value="TOR">
+      <span><strong>Transcript of Records (TOR)</strong><span>Academic record template.</span></span>
+     </label>
+     <label class="service">
+      <input type="radio" name="document" value="Enrollment">
+      <span><strong>Certificate of Enrollment</strong><span>Enrollment certification template.</span></span>
+     </label>
+     <label class="service">
+      <input type="radio" name="document" value="Other">
+      <span><strong>Other document</strong><span>Specify the document requested below.</span></span>
+     </label>
     </div>
+
     <label for="purpose">Purpose</label>
     <select id="purpose" required>
-     <option value="">Select purpose</option><option>Scholarship application</option><option>Employment requirement</option><option>Personal copy</option><option>School requirement</option><option>Other</option>
+     <option value="">Select purpose</option>
+     <option>Scholarship application</option>
+     <option>Employment requirement</option>
+     <option>Personal copy</option>
+     <option>School requirement</option>
+     <option>Other</option>
     </select>
+
     <label for="other-document">If Other, specify document (optional)</label>
     <input id="other-document" placeholder="Enter document name">
+
     <div class="form-row">
-     <div><label for="term">Academic term</label><input id="term" value="First Semester, AY 2026–2027"></div>
-     <div><label for="copies">Number of copies</label><input id="copies" type="number" min="1" max="20" value="1" required></div>
+     <div>
+      <label for="term">Academic term</label>
+      <input id="term" value="First Semester, AY 2026–2027">
+     </div>
+     <div>
+      <label for="copies">Number of copies</label>
+      <input id="copies" type="number" min="1" max="20" value="1" required>
+     </div>
     </div>
+
     <label for="payment-method">Payment option</label>
     <select id="payment-method" required>
      <option value="">Select payment option</option>
@@ -126,14 +183,29 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:18px}
      <option>GCash (manual verification)</option>
      <option>Already paid / for verification</option>
     </select>
+
     <div class="form-row">
-     <div><label for="amount">Amount (₱)</label><input id="amount" type="number" min="0" step="0.01" value="0.00" required></div>
-     <div><label for="payment-reference">Payment reference (optional)</label><input id="payment-reference" placeholder="GCash reference / OR number"></div>
+     <div>
+      <label for="amount">Amount (₱)</label>
+      <input id="amount" type="number" min="0" step="0.01" value="0.00" required>
+     </div>
+     <div>
+      <label for="payment-reference">Payment reference (optional)</label>
+      <input id="payment-reference" placeholder="GCash reference / OR number">
+     </div>
     </div>
-    <div class="info">Payment is only recorded as information on the printable stub. This prototype does not process GCash payments or verify payment transactions.</div>
-    <div class="form-actions no-print"><button type="submit">Generate Document</button><button type="reset" class="secondary">Clear</button></div>
+
+    <div class="info">
+     Payment is only recorded as information on the printable stub. This prototype does not process GCash payments or verify payment transactions.
+    </div>
+
+    <div class="form-actions no-print">
+     <button type="submit">Generate Document</button>
+     <button type="reset" class="secondary">Clear</button>
+    </div>
    </form>
   </section>
+
   <div>
    <section class="panel">
     <h2>My Student Profile</h2>
@@ -143,6 +215,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:18px}
     <p class="profile-line"><b>Program:</b> BS Meteorology</p>
     <p class="profile-line"><b>Year &amp; section:</b> 4th Year · BSMet-4A</p>
    </section>
+
    <section class="panel">
     <h2>Printing Instructions</h2>
     <ol class="small-note" style="padding-left:18px;line-height:1.8">
@@ -169,17 +242,19 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:18px}
  </div>
 </section>
 </main>
+
 <footer>ISKO Student Services · Academic prototype · Fictional sample records</footer>
 
 <script>
 const DEMO_STUDENT_NUMBER = "2022-0001";
 const DEMO_PASSWORD = "iska123";
-let currentDocumentData = null;
 
 document.getElementById("login-form").addEventListener("submit", function(event) {
  event.preventDefault();
+
  const id = document.getElementById("student-id").value.trim();
  const password = document.getElementById("student-password").value;
+
  if (id === DEMO_STUDENT_NUMBER && password === DEMO_PASSWORD) {
   document.getElementById("login-screen").classList.add("hidden");
   document.getElementById("student-screen").classList.remove("hidden");
@@ -199,8 +274,10 @@ function logout() {
 
 document.getElementById("document-form").addEventListener("submit", function(event) {
  event.preventDefault();
+
  const selected = document.querySelector('input[name="document"]:checked');
  if (!selected) return;
+
  const data = {
   type: selected.value,
   other: document.getElementById("other-document").value.trim(),
@@ -213,45 +290,128 @@ document.getElementById("document-form").addEventListener("submit", function(eve
   date: new Date().toLocaleDateString(),
   control: "ISKO-" + String(Date.now()).slice(-7)
  };
- currentDocumentData = data;
+
  renderPrintable(data);
+
  document.getElementById("student-screen").classList.add("hidden");
  document.getElementById("document-preview").classList.remove("hidden");
  window.scrollTo(0,0);
 });
 
 function esc(value) {
- return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ return String(value).replace(/[&<>"']/g, ch => ({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+ }[ch]));
 }
+
 function heading(title) {
- return `<div class="paper-head"><h2>BICOL UNIVERSITY</h2><p>Student Services · Academic Records</p><p>Legazpi City, Albay, Philippines</p></div><div class="watermark">SAMPLE DOCUMENT — FOR PROTOTYPE DEMONSTRATION ONLY</div><div class="paper-title">${title}</div>`;
+ return `
+  <div class="paper-head">
+   <h2>BICOL UNIVERSITY</h2>
+   <p>Student Services · Academic Records</p>
+   <p>Legazpi City, Albay, Philippines</p>
+  </div>
+  <div class="watermark">SAMPLE DOCUMENT — FOR PROTOTYPE DEMONSTRATION ONLY</div>
+  <div class="paper-title">${title}</div>
+ `;
 }
+
 function studentDetails(d) {
- return `<p><b>Student Name:</b> Iska<br><b>Student Number:</b> 2022-0001<br><b>Program:</b> BS Meteorology<br><b>Year &amp; Section:</b> 4th Year · BSMet-4A<br><b>Academic Term:</b> ${esc(d.term)}</p>`;
+ return `
+  <p>
+   <b>Student Name:</b> Iska<br>
+   <b>Student Number:</b> 2022-0001<br>
+   <b>Program:</b> BS Meteorology<br>
+   <b>Year &amp; Section:</b> 4th Year · BSMet-4A<br>
+   <b>Academic Term:</b> ${esc(d.term)}
+  </p>
+ `;
 }
+
 function documentMarkup(d) {
  const common = studentDetails(d);
+
  if (d.type === "COG" || d.type === "TOR") {
-  const title = d.type === "COG" ? "CERTIFICATE OF GRADES" : "TRANSCRIPT OF RECORDS";
-  const rows = ["General Education","Meteorological Sciences","Weather Analysis","Atmospheric Physics","Research / Thesis"];
-  return heading(title) + common + `<p>This sample academic record is generated for the ISKO prototype.</p><table class="paper-table"><thead><tr><th>Course / Subject</th><th>Final Grade</th><th>Remarks</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${r}</td><td>1.0</td><td>Passed</td></tr>`).join("")}</tbody></table><p><b>Note:</b> All grades shown are sample values of 1.0 for demonstration only.</p>`;
+  const title = d.type === "COG"
+   ? "CERTIFICATE OF GRADES"
+   : "TRANSCRIPT OF RECORDS";
+
+  const rows = [
+   "General Education",
+   "Meteorological Sciences",
+   "Weather Analysis",
+   "Atmospheric Physics",
+   "Research / Thesis"
+  ];
+
+  return heading(title) + common + `
+   <p>This sample academic record is generated for the ISKO prototype.</p>
+   <table class="paper-table">
+    <thead>
+     <tr><th>Course / Subject</th><th>Final Grade</th><th>Remarks</th></tr>
+    </thead>
+    <tbody>
+     ${rows.map(r => `
+      <tr><td>${r}</td><td>1.0</td><td>Passed</td></tr>
+     `).join("")}
+    </tbody>
+   </table>
+   <p><b>Note:</b> All grades shown are sample values of 1.0 for demonstration only.</p>
+  `;
  }
+
  if (d.type === "COR") {
-  return heading("CERTIFICATE OF REGISTRATION") + common + `<p>This is to present the sample registration details of the student named above for the stated academic term.</p><table class="paper-table"><tr><th>Registration Detail</th><th>Information</th></tr><tr><td>Program</td><td>BS Meteorology</td></tr><tr><td>Year &amp; Section</td><td>4th Year · BSMet-4A</td></tr><tr><td>Academic Term</td><td>${esc(d.term)}</td></tr><tr><td>Enrollment Status</td><td>Sample / For demonstration</td></tr></table>`;
+  return heading("CERTIFICATE OF REGISTRATION") + common + `
+   <p>This is to present the sample registration details of the student named above for the stated academic term.</p>
+   <table class="paper-table">
+    <tr><th>Registration Detail</th><th>Information</th></tr>
+    <tr><td>Program</td><td>BS Meteorology</td></tr>
+    <tr><td>Year &amp; Section</td><td>4th Year · BSMet-4A</td></tr>
+    <tr><td>Academic Term</td><td>${esc(d.term)}</td></tr>
+    <tr><td>Enrollment Status</td><td>Sample / For demonstration</td></tr>
+   </table>
+  `;
  }
+
  if (d.type === "Good Moral") {
-  return heading("CERTIFICATE OF GOOD MORAL CHARACTER") + `<p>To Whom It May Concern:</p>${common}<p>This is a sample certificate layout prepared to demonstrate the ISKO document-generation process. It is not an official certification of conduct and requires review and authorization by the appropriate university office.</p>`;
+  return heading("CERTIFICATE OF GOOD MORAL CHARACTER") + `
+   <p>To Whom It May Concern:</p>
+   ${common}
+   <p>This is a sample certificate layout prepared to demonstrate the ISKO document-generation process. It is not an official certification of conduct and requires review and authorization by the appropriate university office.</p>
+  `;
  }
+
  if (d.type === "Enrollment") {
-  return heading("CERTIFICATE OF ENROLLMENT") + common + `<p>This is to certify, for prototype demonstration purposes, that the student information shown above is associated with the stated academic term.</p><p>This sample is not an official proof of enrollment.</p>`;
+  return heading("CERTIFICATE OF ENROLLMENT") + common + `
+   <p>This is to certify, for prototype demonstration purposes, that the student information shown above is associated with the stated academic term.</p>
+   <p>This sample is not an official proof of enrollment.</p>
+  `;
  }
- return heading("STUDENT DOCUMENT REQUEST") + common + `<p><b>Document requested:</b> ${esc(d.other || "Other academic document")}</p><p><b>Purpose:</b> ${esc(d.purpose)}</p><p>This page is a printable sample claim document for the selected requirement.</p>`;
+
+ return heading("STUDENT DOCUMENT REQUEST") + common + `
+  <p><b>Document requested:</b> ${esc(d.other || "Other academic document")}</p>
+  <p><b>Purpose:</b> ${esc(d.purpose)}</p>
+  <p>This page is a printable sample claim document for the selected requirement.</p>
+ `;
 }
+
 function renderPrintable(d) {
- document.getElementById("paper-content").innerHTML = documentMarkup(d) +
- `<div class="signature-row"><div class="signature">Prepared / Generated by ISKO</div><div class="signature">Authorized University Official</div></div>`;
+ document.getElementById("paper-content").innerHTML =
+  documentMarkup(d) + `
+   <div class="signature-row">
+    <div class="signature">Prepared / Generated by ISKO</div>
+    <div class="signature">Authorized University Official</div>
+   </div>
+  `;
+
  document.getElementById("receipt-content").innerHTML = `
-  <h3>PAYMENT / CLAIM STUB</h3><div class="receipt-sub">ISKO Student Services · Control No. ${esc(d.control)}</div>
+  <h3>PAYMENT / CLAIM STUB</h3>
+  <div class="receipt-sub">ISKO Student Services · Control No. ${esc(d.control)}</div>
+
   <div class="receipt-grid">
    <div class="receipt-item"><b>Student</b>Iska</div>
    <div class="receipt-item"><b>Student Number</b>2022-0001</div>
@@ -264,19 +424,28 @@ function renderPrintable(d) {
    <div class="receipt-item"><b>Payment Reference</b>${esc(d.reference || "Not provided")}</div>
    <div class="receipt-item"><b>Payment Status</b>${d.payment === "Cash at cashier" ? "For payment at cashier" : "For manual verification"}</div>
   </div>
+
   <div class="watermark">NOT AN OFFICIAL RECEIPT · PAYMENT NOT PROCESSED BY THIS PROTOTYPE</div>
-  <p style="font-size:11px;line-height:1.5">Present this stub to the appropriate university office or cashier for verification. This prototype does not collect payments, issue official receipts, or transmit document requests.</p>`;
+  <p style="font-size:11px;line-height:1.5">
+   Present this stub to the appropriate university office or cashier for verification. This prototype does not collect payments, issue official receipts, or transmit document requests.
+  </p>
+ `;
 }
+
 function printDocuments() {
  document.body.classList.add("printing");
  window.print();
  setTimeout(() => document.body.classList.remove("printing"), 500);
 }
+
 function backToForm() {
  document.getElementById("document-preview").classList.add("hidden");
  document.getElementById("student-screen").classList.remove("hidden");
 }
-window.addEventListener("afterprint", () => document.body.classList.remove("printing"));
+
+window.addEventListener("afterprint", () => {
+ document.body.classList.remove("printing");
+});
 </script>
 </body>
 </html>
